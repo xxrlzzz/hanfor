@@ -1075,7 +1075,7 @@ def get_datatable_additional_cols(app):
     result = list()
     session_dict = pickle_load_from_dump(app.config['SESSION_STATUS_PATH'])  # type: dict
 
-    for index, name in enumerate(session_dict['csv_fieldnames']):
+    for index, name in enumerate(session_dict.get('csv_fieldnames', [])):
         result.append(
             {
                 'target': index + offset,

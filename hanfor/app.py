@@ -35,6 +35,8 @@ mimetypes.add_type('text/javascript', '.js')
 # Create the app
 app = Flask(__name__)
 app.config.from_object('config')
+# app.config['JSON_AS_ASCII'] = False
+app.config['JSONFIFY_MIMETYPE'] = 'application/json;charset=utf-8'
 
 from example_blueprint import example_blueprint
 from tags import tags
@@ -1245,6 +1247,8 @@ def startup_hanfor(args, HERE) -> bool:
                 return False
             session_dict['csv_hash'] = csv_hash
         session_dict['csv_input_file'] = args.input_csv
+    else:
+        session_dict['csv_input_file'] = ''
 
     app.config['CSV_INPUT_FILE'] = os.path.basename(session_dict['csv_input_file'])
     app.config['CSV_INPUT_FILE_PATH'] = session_dict['csv_input_file']
@@ -1314,7 +1318,16 @@ if __name__ == '__main__':
     fetch_hanfor_version()
     utils.register_assets(app)
 
+    # logging.debug('app start')
+    # print('app start')
+
     # Parse python args and startup hanfor session.
     args = utils.HanforArgumentParser(app).parse_args()
-    if startup_hanfor(args, HERE):
-        app.run(**get_app_options())
+    try:
+        if startup_hanfor(args, HERE):
+            app.run(**get_app_options())
+        else:
+            logging.warning("start hanfor failed")
+    except Exception as e:
+        logging.debug(e.__traceback__)
+        logging.debug(e)

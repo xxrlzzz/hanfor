@@ -32,7 +32,7 @@ def pickle_load_from_dump(filename):
     :return: Object dumped in file
     :rtype: object
     """
-    if os.path.getsize(filename) <= 0:
+    if not os.path.exists(filename) or os.path.getsize(filename) <= 0:
         return dict()
 
     try:

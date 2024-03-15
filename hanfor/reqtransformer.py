@@ -260,12 +260,18 @@ class RequirementCollection(HanforVersioned, Pickleable):
                     requirement.tags.update(tags)
                 # Set the status
                 if self.csv_meta.status_header is not None:
-                    status = row[self.csv_meta.status_header].strip()
+                    data = row[self.csv_meta.status_header]
+                    status = ''
+                    if data is not None:
+                        status = data.strip()
                     if status not in ['Todo', 'Review', 'Done']:
                         logging.debug('Status {} not supported. Set to `Todo`'.format(status))
                         status = 'Todo'
                     requirement.status = status
                 # Parse and set the requirements.
+                if not row[self.csv_meta.formal_header]:
+                    continue
+                logging.debug("formal {}".format(row[self.csv_meta.formal_header]))
                 formalizations = json.loads(row[self.csv_meta.formal_header])
                 for key, formalization_dict in formalizations.items():
                     formalization = Formalization(int(key))
@@ -377,7 +383,7 @@ class Requirement(HanforVersioned, Pickleable):
         """
         self._revision_diff = dict()
         for csv_key in self.csv_row.keys():
-            if csv_key not in other.csv_row.keys():
+            if csv_key not in other.csv_row.keys() or other.csv_row[csv_key] is None:
                 other.csv_row[csv_key] = ''
             if self.csv_row[csv_key] is None:
                 # This can happen if we revision with an CSV that is missing the csv_key now.
