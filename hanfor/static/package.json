@@ -19,6 +19,8 @@
     "autosize": "^5.0.1",
     "awesomplete": "^1.1.5",
     "bootstrap": "^5.2.1",
+    "bpmn-js": "^17.2.1",
+    "bpmn-js-token-simulation": "^0.34.1",
     "chart.js": "^3.7.1",
     "chartjs-plugin-annotation": "^1.4.0",
     "cytoscape": "^3.2.0",

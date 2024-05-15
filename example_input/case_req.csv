@@ -1,0 +1,74 @@
+ID,Description,Type,Hanfor_Formalization,Hanfor_Tags,Hanfor_Status
+
+REQ1,An officer submits evidence of a transaction,requirement,"{""0"": {""expressions"": {""P"": """", ""Q"": """", ""R"": ""!submit_transaction_evidence"", ""S"": """", ""T"": """", ""U"": """", ""V"": """"}, ""pattern"": ""Initialization "", ""scope"": ""GLOBALLY""}}",has_formalization,Todo
+REQ2,An accountant records the cash transaction to a cash database,requirement,"{""0"": {""expressions"": {""P"": """", ""Q"": """", ""R"": ""submit_transaction_evidence "", ""S"": ""record_transaction"", ""T"": ""10"", ""U"": """", ""V"": """"}, ""pattern"": ""BoundedResponse"", ""scope"": ""GLOBALLY""}}",has_formalization,Todo
+
+REQ3,Management orders a cash-out report which of the year and month is given by management.,requirement,"{""0"": {""expressions"": {""P"": """", ""Q"": """", ""R"": ""!choose_year_month"", ""S"": """", ""T"": """", ""U"": """", ""V"": """"}, ""pattern"": ""Initialization "", ""scope"": ""GLOBALLY""}, ""1"": {""expressions"": {""P"": ""choose_year_month"", ""Q"": """", ""R"": ""order_cash_report"", ""S"": ""filter_cash_transactions"", ""T"": ""10"", ""U"": """", ""V"": """"}, ""pattern"": ""BoundedResponse"", ""scope"": ""AFTER""}}",has_formalization,Todo
+REQ4,An accountant filters out cash trasactions from the database,requirement,"{""0"": {""expressions"": {""P"": ""choose_year_month "", ""Q"": """", ""R"": ""order_cash_report "", ""S"": ""filter_cash_transactions "", ""T"": ""10"", ""U"": """", ""V"": """"}, ""pattern"": ""BoundedResponse"", ""scope"": ""AFTER""}, ""1"": {""expressions"": {""P"": """", ""Q"": """", ""R"": ""filter_cash_transactions "", ""S"": ""query_not_empty  || query_empty "", ""T"": """", ""U"": """", ""V"": """"}, ""pattern"": ""Response"", ""scope"": ""GLOBALLY""}}",has_formalization,Todo
+REQ5,If the query is not empty; the accountant prints a cash-out report; gives it to management;,requirement,"{""0"": {""expressions"": {""P"": ""order_cash_report "", ""Q"": """", ""R"": ""print_cash_report"", ""S"": ""filter_cash_transactions "", ""T"": ""query_not_empty"", ""U"": """", ""V"": """"}, ""pattern"": ""PrecedenceChain2-1"", ""scope"": ""AFTER""}}",has_formalization,Todo
+REQ6,Otherwise; there is no cash-out.,requirement,"{""0"": {""expressions"": {""P"": ""order_cash_report "", ""Q"": """", ""R"": ""no_cash_out_event"", ""S"": ""filter_cash_transactions "", ""T"": ""query_empty"", ""U"": """", ""V"": """"}, ""pattern"": ""PrecedenceChain2-1"", ""scope"": ""AFTER""}}",has_formalization,Todo
+
+REQ7,Management wants to withdraw the mandatory savings by providing information about the members.,requirement,,
+REQ8,An officer displays the mandatory savings based on the member ID;,requirement,,
+REQ9,so the officer processes the withdrawal of the mandatory savings.,requirement,,
+
+REQ10,Management asks a member to be removed from the cooperative membership., requirement,,
+REQ11,An officer accepts the management’s request., requirement,,
+REQ12,The officer reads information about members from the member database, requirement,,
+REQ13,updates the member’s status to resign to the member database, requirement,,
+REQ14,then informs the management about the member’s status., requirement,,
+
+REQ15,A member needs to display detailed information about a member by providing a member ID., requirement,,
+REQ16,An officer accepts member requests.,requirement,,
+REQ17,The officer reads a member’s information from the member database.,requirement,,
+REQ18,If the member exists; then the officer reads the work unit data from the member database, requirement,,
+REQ19,the officer provides the detailed member information to the member, requirement,,
+REQ20,else the officer confirms no information., requirement,,
+
+REQ21,A member needs a monthly billing statement by providing his member ID and billing month.,requirement,,
+REQ22,An officer reads a member’s billing data from the billing database based on member ID and month.,requirement,,
+REQ23,If the monthly bill exists; the officer prints the member’s bill and informs the member, requirement,,
+REQ24,otherwise the bill does not exist.,requirement,,
+
+REQ25,A member submits changes to the work unit by filling out a form, requirement,,
+REQ26,so an officer accepts member’s requests., requirement,,
+REQ27,The officer reads member and the works unit information from the member and the works unit databases., requirement,,
+REQ28,The officer updates member information based on the member database., requirement,,
+
+REQ29,Management wants to realize member loans.,requirement,,
+REQ30,An officer receives orders for member loan realization.,requirement,,
+REQ31,The officer opens the member loan realization menu,requirement,,
+REQ32,sets the loan type, requirement,,
+REQ33,enters the member ID., requirement,,
+REQ34,The officer sets the instalment amount; principal instalment; and repayment period., requirement,,
+REQ35,The officer realizes member loans; saves loan realization information to the loan database., requirement,,
+
+REQ36,A prospective member applies a requirements document to become a cooperative member that an officer accepts the document., requirement,,
+REQ37,Once the document has been lightly checked by the officer; the officer sends the document to the management for further processing., requirement,,
+REQ38,Management fully reviews the document based on the cooperative master book., requirement,,
+REQ39,Management assigns a status to a document based on the review results, requirement,,
+REQ40,so management sends the document back to the officer., requirement,,
+REQ41,If the status is accepted; then the officer creates a new member; adds a new member to the member database; prints the cooperative card, requirement ,,
+REQ42,otherwise the officer returns the requirements document to the prospective member to complete the requirements; then the prospective member receives the requirements document to be completed., requirement,,
+
+REQ43,*1 A member submits a loan request by attaching a credit requirements document.,requirement,,
+REQ44,The credit section accepts member’s loan requests.,requirement,,
+REQ45,The credit section checks the credit requirements document which if the credit requirements document is incomplete; so the credit section returns it to the member to complete the credit required document, requirement,,
+REQ46,go-to 1. The credit section checks the mandatory deposit from the deposit database and checks the current loan from the loan database., requirement,,
+REQ47,If the mandatory deposit has not been paid off or the current loan exists; then the submission status is rejected; else the submission status is okay., requirement,,
+REQ48,The credit section sends the submission document to the officer for further processing. The officer receives the document., requirement,,
+
+REQ49,Whenever the sales department receives an order; a new process instance is created.
+REQ50,A member of the sales department can then reject or accept the order for a customized bike. In the former case; the process instance is finished. In the latter case; the storehouse and the engineering department are informed.
+REQ51,The storehouse immediately processes the part list of the order and checks the required quantity of each part. If the part is available in-house; it is reserved. If it is not available; it is back-ordered. This procedure is repeated for each item on the part list. 
+REQ52,In the meantime; the engineering department prepares everything for the assembling of the ordered bicycle. If the storehouse has successfully reserved or back-ordered every item of the part list and the preparation activity has finished; the engineering department assembles the bicycle.
+REQ53,Afterwards; the sales department ships the bicycle to the customer and finishes the process instance.
+
+REQ54,A customer brings in a defective computer and the CRS checks the defect and hands out a repair cost calculation back. If the customer decides that the costs are acceptable; the process continues; otherwise she takes her computer home unrepaired.
+REQ55,The ongoing repair consists of two activities; which are executed; in an arbitrary order. The first activity is to check and repair the hardware; whereas the second activity checks and configures the software.
+REQ56,After each of these activities; the proper system functionality is tested. If an error is detected another arbitrary repair activity is executed; otherwise the repair is finished.
+
+REQ57,When a guest calls room service at The Evanstonian; the room-service manager takes down the order.
+REQ58,She then submits an order ticket to the kitchen to begin preparing the food. She also gives an order to the sommelier (i.e.; the wine waiter) to fetch wine from the cellar and to prepare any other alcoholic beverages. Eighty percent of room-service orders include wine or some other alcoholic beverage. Finally; she assigns the order to the waiter.
+REQ59,While the kitchen and the sommelier are doing their tasks; the waiter readies a cart (i.e.; puts a tablecloth on the cart and gathers silverware). The waiter is also responsible for nonalcoholic drinks.
+REQ60,Once the food; wine; and cart are ready; the waiter delivers it to the guests room. After returning to the room-service station; the waiter debits the guests account. The waiter may wait to do the billing if he has another order to prepare or deliver.

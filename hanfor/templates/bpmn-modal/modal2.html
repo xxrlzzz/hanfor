@@ -1,0 +1,67 @@
+<div id="bpmn_modal" class="modal fade" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 id="simulator-modal-title" class="modal-title">
+                  BPMN <span class="lead"></span>
+              </h5>
+              <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="container-fluid">
+                  <div class="row g-2 row-spacing">
+                    <div class="col">
+                        <div id="chart-canvas" style="height: 30vh"></canvas>
+                    </div>
+                  </div>
+                  <!-- <div class="row g-2 row-spacing">
+                    {% for req in reqs %}
+                      <div class="col-2">
+                          <div class="simulator-variables input-group">
+                              <span id="{{ req.id }}_variable_input_prepend" class="input-group-text" style="border: 0"></span>
+
+                              <div class="form-floating">
+                                  <label for="{{ req.id }}_variable_input">
+                                      <span class="lhs text-truncate">{{ req.desc }}</span>
+                                  </label>
+                              </div>
+
+                              <div class="invalid-tooltip">Please provide a valid value.</div>
+                          </div>
+                      </div>
+                  {% endfor %}
+                  </div> -->
+              </div>
+
+            <div class="row g-2 row-spacing">
+                <div id="drop-zone" style="height: 20vh;width: 100%;
+                border: 2px dashed #0087F7;
+                border-radius: 5px;
+                text-align: center;">拖拽BPMN XML文件到这里</div>
+            </div>
+
+              <table id="bpmn_requirements_table" class="table table-hover table-bordered" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>
+                        <button class="btn btn-secondary btn-sm select-all-button" type="button">All</button>
+                    </th>
+                    <th title="Position in CSV file." class="default-col">Pos.</th>
+                    <th class="default-col">Id</th>
+                    <th class="default-col">Description</th>
+                    <th class="default-col">Formalization</th>
+                    {% for col in additional_cols %}
+                        <th class="extra-col">{{ col.table_header_name|title }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>

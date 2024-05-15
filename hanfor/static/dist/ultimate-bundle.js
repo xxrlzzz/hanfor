@@ -1,1 +1,203 @@
-(()=>{var e,t={5931:(e,t,a)=>{var r=a(9755);a(1388),a(4712),a(5700),a(944),a(3889),a(7175),a(6824);const{SearchNode:n}=a(3024),l=sessionStorage.getItem("ultimateSearchString"),{Modal:o}=a(4712);let i;r(document).ready((function(){const e=r("#search_bar"),t=r("#ultimate-jobs-tbl"),a=t.DataTable({paging:!0,stateSave:!0,pageLength:50,responsive:!0,lengthMenu:[[10,50,100,500,-1],[10,50,100,500,"All"]],dom:'rt<"container"<"row"<"col-md-6"li><"col-md-6"p>>>',ajax:{url:"../api/ultimate/jobs"},deferRender:!0,columns:d,initComplete:function(){e.val(l),u(e.val().trim()),r.fn.dataTable.ext.search.push((function(e,t){return function(e){return i.evaluate(e,[!0,!0,!0])}(t)})),this.api().draw()}});new r.fn.dataTable.ColReorder(a,{}),e.keypress((function(t){13===t.which&&(u(e.val().trim()),a.draw())})),r(".clear-all-filters").click((function(){e.val("").effect("highlight",{color:"green"},500),u(e.val().trim()),a.draw()}));const n=r("#ultimate-job-modal-result-tbl").DataTable({paging:!0,stateSave:!0,pageLength:50,responsive:!0,lengthMenu:[[10,50,100,500,-1],[10,50,100,500,"All"]],dom:'rt<"container"<"row"<"col-md-6"li><"col-md-6"p>>>',deferRender:!0,columns:s,initComplete:function(){this.api().draw()}});t.find("tbody").on("click","a.modal-opener",(function(e){e.preventDefault();let t=a.row(r(e.target).parent()).data();o.getOrCreateInstance(r("#ultimate-job-modal")).show(),r("#ultimate-job-modal-title").html("Job ID: "+t.requestId),r("#ultimate-job-modal-request-time").text(t.request_time),r("#ultimate-job-modal-last-update").text(t.last_update),r("#ultimate-job-modal-request-status").text(t.status),n.clear(),n.rows.add(t.result),n.draw(),r("#ultimate-tag-modal-download-btn").click((function(){var e;e=t.requestId,r.ajax({type:"GET",url:"../api/ultimate/job/"+e+"?download=true"}).done((function(e){!function(e,t){let a=document.createElement("a");a.setAttribute("href","data:text/plain;charset=utf-8,"+encodeURIComponent(t)),a.setAttribute("download",e),a.style.display="none",document.body.appendChild(a),a.click(),document.body.removeChild(a)}(e.job_id+".json",JSON.stringify(e,null,4))})).fail((function(e,t,a){alert(a+"\n\n"+e.responseText)}))}))}))}));const d=[{data:"requestId",render:function(e){return`<a class="modal-opener" href="#">${e}</a>`}},{data:"request_time",order:"asc",render:function(e){return`<div class="white-space-pre">${e}</div>`}},{data:"last_update",render:function(e){return`<div class="white-space-pre">${e}</div>`}},{data:"status",render:function(e){return`<div class="white-space-pre">${e}</div>`}},{data:"selected_requirements",render:function(e){let t="";for(let a=0;a<e.length;a++){let r=e[a][0],n=e[a][1];"True"!==display_req_without_formalisation&&0===n||(t+=`<span class="badge ${0===n?"bg-light":"bg-info"}"><a href="${base_url}?command=search&col=2&q=%5C%22${r}%5C%22" target="_blank" class="link-light text-muted">${r} (${n})</a></span> `)}return t}},{data:"result_requirements",render:function(e){let t="";for(let a=0;a<e.length;a++){let r=e[a][0],n=e[a][1];t+=`<span class="badge ${0===n?"bg-light":"bg-info"}"><a href="${base_url}?command=search&col=2&q=%5C%22${r}%5C%22" target="_blank" class="link-light text-muted">${r} (${n})</a></span> `}return t}}],s=[{data:"logLvl"},{data:"type"},{data:"shortDesc",render:function(e){return`${e.replaceAll("\n","<br/>")}`}},{data:"longDesc",render:function(e){return`${e.replaceAll("\n","<br/>")}`}}];function u(e){sessionStorage.setItem("ultimateSearchString",e),i=n.fromQuery(e)}}},a={};function r(e){var n=a[e];if(void 0!==n)return n.exports;var l=a[e]={id:e,exports:{}};return t[e].call(l.exports,l,l.exports,r),l.exports}r.m=t,e=[],r.O=(t,a,n,l)=>{if(!a){var o=1/0;for(u=0;u<e.length;u++){for(var[a,n,l]=e[u],i=!0,d=0;d<a.length;d++)(!1&l||o>=l)&&Object.keys(r.O).every((e=>r.O[e](a[d])))?a.splice(d--,1):(i=!1,l<o&&(o=l));if(i){e.splice(u--,1);var s=n();void 0!==s&&(t=s)}}return t}l=l||0;for(var u=e.length;u>0&&e[u-1][2]>l;u--)e[u]=e[u-1];e[u]=[a,n,l]},r.n=e=>{var t=e&&e.__esModule?()=>e.default:()=>e;return r.d(t,{a:t}),t},r.d=(e,t)=>{for(var a in t)r.o(t,a)&&!r.o(e,a)&&Object.defineProperty(e,a,{enumerable:!0,get:t[a]})},r.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),r.r=e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},r.j=304,(()=>{var e={304:0};r.O.j=t=>0===e[t];var t=(t,a)=>{var n,l,[o,i,d]=a,s=0;if(o.some((t=>0!==e[t]))){for(n in i)r.o(i,n)&&(r.m[n]=i[n]);if(d)var u=d(r)}for(t&&t(a);s<o.length;s++)l=o[s],r.o(e,l)&&e[l]&&e[l][0](),e[l]=0;return r.O(u)},a=self.webpackChunkhanfor=self.webpackChunkhanfor||[];a.forEach(t.bind(null,0)),a.push=t.bind(null,a.push.bind(a))})(),r.nc=void 0;var n=r.O(void 0,[351],(()=>r(5931)));n=r.O(n)})();
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "../ultimate/static/ultimate.js":
+/*!**************************************!*\
+  !*** ../ultimate/static/ultimate.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("/* provided dependency */ var $ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n__webpack_require__(/*! gasparesganga-jquery-loading-overlay */ \"./node_modules/gasparesganga-jquery-loading-overlay/src/loadingoverlay.js\")\n__webpack_require__(/*! bootstrap */ \"./node_modules/bootstrap/dist/js/bootstrap.esm.js\")\n__webpack_require__(/*! datatables.net-bs5 */ \"./node_modules/datatables.net-bs5/js/dataTables.bootstrap5.mjs\")\n__webpack_require__(/*! jquery-ui/ui/effects/effect-highlight */ \"./node_modules/jquery-ui/ui/effects/effect-highlight.js\")\n__webpack_require__(/*! ../../static/js/bootstrap-tokenfield.js */ \"./js/bootstrap-tokenfield.js\")\n__webpack_require__(/*! ../../static/js/bootstrap-confirm-button */ \"./js/bootstrap-confirm-button.js\")\n__webpack_require__(/*! datatables.net-colreorder-bs5 */ \"./node_modules/datatables.net-colreorder-bs5/js/colReorder.bootstrap5.mjs\")\n\nconst {SearchNode} = __webpack_require__(/*! ../../static/js/datatables-advanced-search */ \"./js/datatables-advanced-search.js\");\nconst ultimateSearchString = sessionStorage.getItem('ultimateSearchString')\nconst {Modal} = __webpack_require__(/*! bootstrap */ \"./node_modules/bootstrap/dist/js/bootstrap.esm.js\")\n\nlet search_tree\n\n$(document).ready(function () {\n    const searchInput = $('#search_bar')\n    const ultimateJobsTable = $('#ultimate-jobs-tbl')\n    const ultimateJobsDataTable = ultimateJobsTable.DataTable({\n        paging: true,\n        stateSave: true,\n        pageLength: 50,\n        responsive: true,\n        lengthMenu: [[10, 50, 100, 500, -1], [10, 50, 100, 500, 'All']],\n        dom: 'rt<\"container\"<\"row\"<\"col-md-6\"li><\"col-md-6\"p>>>',\n        ajax: {\n            url: '../api/ultimate/jobs'\n        },\n        deferRender: true,\n        columns: dataTableColumns,\n        initComplete: function () {\n            searchInput.val(ultimateSearchString);\n            update_search(searchInput.val().trim());\n\n            // Enable Hanfor specific table filtering.\n            $.fn.dataTable.ext.search.push(function (settings, data) {\n                // data contains the row. data[0] is the content of the first column in the actual row.\n                // Return true to include the row into the data. false to exclude.\n                return evaluate_search(data);\n            })\n            this.api().draw();\n        }\n    });\n\n    // Bind big custom searchbar to search the table.\n    searchInput.keypress(function (e) {\n        if (e.which === 13) { // Search on enter.\n            update_search(searchInput.val().trim());\n            ultimateJobsDataTable.draw();\n        }\n    });\n\n    $('.clear-all-filters').click(function () {\n        searchInput.val('').effect('highlight', {color: 'green'}, 500);\n        update_search(searchInput.val().trim());\n        ultimateJobsDataTable.draw();\n    });\n\n    const ultimateResultTable = $('#ultimate-job-modal-result-tbl')\n    const ultimateResultDataTable = ultimateResultTable.DataTable({\n        paging: true,\n        stateSave: true,\n        pageLength: 50,\n        responsive: true,\n        lengthMenu: [[10, 50, 100, 500, -1], [10, 50, 100, 500, 'All']],\n        dom: 'rt<\"container\"<\"row\"<\"col-md-6\"li><\"col-md-6\"p>>>',\n        deferRender: true,\n        columns: resultDataTableColumns,\n        initComplete: function () {\n            this.api().draw()\n        }\n    });\n\n    // Add listener for job_link link to modal.\n    ultimateJobsTable.find('tbody').on('click', 'a.modal-opener', function (event) {\n        // prevent body to be scrolled to the top.\n        event.preventDefault();\n\n        // Get row data\n        let data = ultimateJobsDataTable.row($(event.target).parent()).data();\n\n        Modal.getOrCreateInstance($('#ultimate-job-modal')).show();\n        $('#ultimate-job-modal-title').html('Job ID: ' + data['requestId']);\n\n        $('#ultimate-job-modal-request-time').text(data['request_time']);\n        $('#ultimate-job-modal-last-update').text(data['last_update']);\n        $('#ultimate-job-modal-request-status').text(data['status']);\n        ultimateResultDataTable.clear();\n        ultimateResultDataTable.rows.add(data['result']);\n        ultimateResultDataTable.draw();\n\n        $('#ultimate-tag-modal-download-btn').click(function () {\n            download_req(data['requestId']);\n        });\n\n    })\n});\n\nconst dataTableColumns = [\n    {\n        data: 'requestId',\n        render: function (data) {\n            return `<a class=\"modal-opener\" href=\"#\">${data}</a>`\n        }\n    }, {\n        data: 'request_time',\n        order: 'asc',\n        render: function (data) {\n            return `<div class=\"white-space-pre\">${data}</div>`\n        }\n    }, {\n        data: 'last_update',\n        render: function (data) {\n            return `<div class=\"white-space-pre\">${data}</div>`\n        }\n    }, {\n        data: 'status',\n        render: function (data) {\n            return `<div class=\"white-space-pre\">${data}</div>`\n        }\n    }, {\n        data: 'selected_requirements',\n        render: function (data) {\n            let result = ''\n            for (let i = 0; i < data.length; i++) {\n                let name = data[i][0]\n                let count = data[i][1]\n                if (display_req_without_formalisation !== \"True\" && count === 0) continue;\n                const searchQuery = `?command=search&col=2&q=%5C%22${name}%5C%22`\n                const color = count === 0 ? 'bg-light' : 'bg-info'\n                result += `<span class=\"badge ${color}\"><a href=\"${base_url}${searchQuery}\" target=\"_blank\" class=\"link-light text-muted\">${name} (${count})</a></span> `\n            }\n            return result;\n        }\n    }, {\n        data: 'result_requirements',\n        render: function (data) {\n            let result = ''\n            for (let i = 0; i < data.length; i++) {\n                let name = data[i][0]\n                let count = data[i][1]\n                const searchQuery = `?command=search&col=2&q=%5C%22${name}%5C%22`\n                const color = count === 0 ? 'bg-light' : 'bg-info'\n                result += `<span class=\"badge ${color}\"><a href=\"${base_url}${searchQuery}\" target=\"_blank\" class=\"link-light text-muted\">${name} (${count})</a></span> `\n            }\n            return result;\n        }\n    }\n]\n\nconst resultDataTableColumns = [\n    {\n        data: 'logLvl'\n    }, {\n        data: 'type'\n    }, {\n        data: 'shortDesc',\n        render: function (data) {\n            return `${data.replaceAll(\"\\n\", \"<br/>\")}`\n        }\n    }, {\n        data: 'longDesc',\n        render: function (data) {\n            return `${data.replaceAll(\"\\n\", \"<br/>\")}`\n        }\n    }\n]\n\nfunction update_search(string) {\n    sessionStorage.setItem('ultimateSearchString', string)\n    search_tree = SearchNode.fromQuery(string)\n}\n\nfunction evaluate_search(data) {\n    return search_tree.evaluate(data, [true, true, true])\n}\n\nfunction download_req(req_id) {\n    $.ajax({\n        type: 'GET',\n        url: '../api/ultimate/job/' + req_id + '?download=true',\n    }).done(function (data) {\n        download(data['job_id'] + '.json', JSON.stringify(data, null, 4));\n    }).fail(function (jqXHR, textStatus, errorThrown) {\n        alert(errorThrown + '\\n\\n' + jqXHR['responseText']);\n    })\n}\n\nfunction download(filename, text) {\n    let element = document.createElement('a');\n    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));\n    element.setAttribute('download', filename);\n\n    element.style.display = 'none';\n    document.body.appendChild(element);\n\n    element.click();\n\n    document.body.removeChild(element);\n}\n\n//# sourceURL=webpack://hanfor/../ultimate/static/ultimate.js?");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			id: moduleId,
+/******/ 			loaded: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	(() => {
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
+/******/ 			}
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/node module decorator */
+/******/ 	(() => {
+/******/ 		__webpack_require__.nmd = (module) => {
+/******/ 			module.paths = [];
+/******/ 			if (!module.children) module.children = [];
+/******/ 			return module;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"ultimate": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			return __webpack_require__.O(result);
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = self["webpackChunkhanfor"] = self["webpackChunkhanfor"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/nonce */
+/******/ 	(() => {
+/******/ 		__webpack_require__.nc = undefined;
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["commons"], () => (__webpack_require__("../ultimate/static/ultimate.js")))
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	
+/******/ })()
+;

@@ -23,6 +23,7 @@ from guesser.guesser_registerer import REGISTERED_GUESSERS
 from reqtransformer import Requirement, VariableCollection, Variable, VarImportSessions, Formalization, Scope
 from ressources import Report, QueryAPI
 from ressources.simulator_ressource import SimulatorRessource
+from ressources.bpmn_ressource import BPMNResource
 from static_utils import get_filenames_from_dir, pickle_dump_obj_to_file, choice, pickle_load_from_dump, hash_file_sha1
 from patterns import PATTERNS, VARIABLE_AUTOCOMPLETE_EXTENSION
 from tags.tags import TagsApi
@@ -95,6 +96,11 @@ def nocache(view):
 def simulator():
     return SimulatorRessource(app, request).apply_request()
 
+@app.route('/bpmn', methods=['GET', 'POST', 'DELETE'])
+@nocache
+def bpmn():
+    return BPMNResource(app, request).apply_request()
+
 @app.route('/api/tools/<command>', methods=['GET', 'POST'])
 @nocache
 def tools_api(command):
@@ -148,6 +154,7 @@ def api(resource, command):
     ]
     commands = [
         'get',
+        'get_by_id',
         'gets',
         'set',
         'update',
@@ -195,6 +202,17 @@ def api(resource, command):
 
             if requirement:
                 return jsonify(result)
+
+        if command == 'get_by_id':
+            ids = request.args.get('ids', '').split(',')
+            result = dict()
+            result['data'] = list()
+            for rid in ids: 
+                requirement = Requirement.load_requirement_by_id(rid, app)
+                result['data'].append(requirement.to_dict(include_used_vars=True))
+            logging.info("Get requirements by ids: {}, result: {}".format(ids, result))
+            
+            return jsonify(result)
 
         # Get all requirements
         if command == 'gets':
@@ -1317,9 +1335,6 @@ if __name__ == '__main__':
 
     fetch_hanfor_version()
     utils.register_assets(app)
-
-    # logging.debug('app start')
-    # print('app start')
 
     # Parse python args and startup hanfor session.
     args = utils.HanforArgumentParser(app).parse_args()

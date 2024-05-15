@@ -11,6 +11,8 @@ const config = {
         //tags: __dirname + '/js/tags.js',
         simulator_tab: __dirname + '/js/simulator-tab.js',
         simulator_modal: __dirname + '/js/simulator-modal.js',
+        bpmn_tab: __dirname + '/js/bpmn-tab.js',
+        bpmn_modal: __dirname + '/js/bpmn-modal.js',
         example_blueprint: __dirname + '/../example_blueprint/static/example_blueprint.js',
         tags: __dirname + '/../tags/static/tags.js',
         statistics: __dirname + '/../statistics/static/statistics.js',

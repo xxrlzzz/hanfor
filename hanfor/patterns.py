@@ -376,7 +376,8 @@ PATTERNS = {
     'BndTriggeredEntryConditionPattern': {
         'pattern': 'it is always the case that after {R} holds for at least {S} time units and {T} holds, then {U} holds',
         'countertraces': {
-            'GLOBALLY': ['true;⌈R⌉ ∧ ℓ ≥ S;⌈(R && (T && !U))⌉;true'],
+            # 'GLOBALLY': ['true;⌈R⌉ ∧ ℓ ≥ S;⌈(R && (T && !U))⌉;true'],
+            'GLOBALLY': ['true;⌈R⌉ ∧ ℓ ≥ S;⌈(T && !U)⌉;true'],
             'BEFORE': ['⌈!P⌉;⌈(!P && R)⌉ ∧ ℓ ≥ S;⌈(!P && (R && (T && !U)))⌉;true'],
             'AFTER': ['true;⌈P⌉;true;⌈R⌉ ∧ ℓ ≥ S;⌈(R && (T && !U))⌉;true'],
             'BETWEEN': ['true;⌈(P && !Q)⌉;⌈!Q⌉;⌈(!Q && R)⌉ ∧ ℓ ≥ S;⌈(!Q && (R && (T && !U)))⌉;true;⌈Q⌉;true'],

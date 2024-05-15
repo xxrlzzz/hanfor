@@ -6,6 +6,7 @@ const annotationPlugin = require('chartjs-plugin-annotation/dist/chartjs-plugin-
 Chart.register(...registerables, annotationPlugin)
 
 function init_simulator_modal(data) {
+    debugger;
     const simulator_modal = $(data['html'])
 
     const modal_title_span = simulator_modal.find('#simulator-modal-title span')
